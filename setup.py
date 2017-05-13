@@ -23,7 +23,7 @@ setup(
     description = 'Adds filters for Django-specific features.',
     url         = 'https://filters.readthedocs.io/',
 
-    version = '1.0.0',
+    version = '1.0.1',
 
     packages = ['filters_django'],
 
@@ -38,7 +38,7 @@ setup(
 
     install_requires = [
         'Django',
-        'filters >= 1.2.0',
+        'filters >= 1.2.2',
         'six',
     ],
 
