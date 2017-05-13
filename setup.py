@@ -38,7 +38,7 @@ setup(
 
     install_requires = [
         'Django',
-        'filters >= 1.2.0',
+        'filters >= 1.2.2',
         'six',
     ],
 
