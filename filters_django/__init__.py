@@ -4,7 +4,8 @@ from __future__ import absolute_import, division, print_function, \
 
 from typing import Mapping, Sequence, Text, Type, Union
 
-from django.db.models import Model as DjangoModel, QuerySet
+from django.db.models import Model as DjangoModel
+from django.db.models.query import QuerySet
 from filters import BaseFilter
 from six import iteritems, python_2_unicode_compatible
 
