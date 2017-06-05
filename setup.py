@@ -42,10 +42,6 @@ setup(
         'six',
     ],
 
-    data_files = [
-        ('', ['LICENSE']),
-    ],
-
     license = 'MIT',
 
     classifiers = [
