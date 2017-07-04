@@ -23,14 +23,14 @@ setup(
     description = 'Adds filters for Django-specific features.',
     url         = 'https://filters.readthedocs.io/',
 
-    version = '1.0.2',
+    version = '1.0.3',
 
     packages = ['filters_django'],
 
     # Install package filters into the global registry.
     entry_points = {
         'filters.extensions': [
-            'django = filters_django',
+            'Model = filters_django:Model',
         ],
     },
 
@@ -40,10 +40,6 @@ setup(
         'Django',
         'filters >= 1.2.2',
         'six',
-    ],
-
-    data_files = [
-        ('', ['LICENSE']),
     ],
 
     license = 'MIT',
