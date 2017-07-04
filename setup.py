@@ -30,7 +30,7 @@ setup(
     # Install package filters into the global registry.
     entry_points = {
         'filters.extensions': [
-            'django = filters_django',
+            'Model = filters_django:Model',
         ],
     },
 
