@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/eflglobal/filters-iso.svg?branch=master
-   :target: https://travis-ci.org/eflglobal/filters-iso
+.. image:: https://travis-ci.org/eflglobal/filters-django.svg?branch=master
+   :target: https://travis-ci.org/eflglobal/filters-django
 .. image:: https://readthedocs.org/projects/filters/badge/?version=latest
    :target: http://filters.readthedocs.io/
 
