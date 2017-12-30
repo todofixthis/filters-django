@@ -19,6 +19,10 @@ tested against the following versions: 2.0, 1.11.
 If you encounter any issues, please report them on our `Bug Tracker`_, and be
 sure to indicate which version of Django you are using.
 
+.. note::
+   The Django Filters project will continue to support Django 1.11 (and Python
+   2) as long as that branch is officially-supported.
+
 ------------
 Installation
 ------------
