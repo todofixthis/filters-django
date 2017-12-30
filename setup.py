@@ -37,7 +37,12 @@ setup(
     long_description = long_description,
 
     install_requires = [
-        'Django',
+        # Django 2.0 does not support Python 3.
+        # Good on them, but we have legacy project to support over here in
+        # filters land (:
+        'Django; python_version >= "3.0"',
+        'Django < 2.0; python_version < "3.0"',
+
         'filters >= 1.2.2',
         'six',
     ],
