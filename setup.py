@@ -10,6 +10,7 @@ from os.path import dirname, join, realpath
 from setuptools import setup
 from setuptools.version import __version__
 
+
 ##
 # Because of the way we declare dependencies here, we need a more recent
 # version of setuptools.
