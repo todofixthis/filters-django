@@ -4,15 +4,24 @@
 from __future__ import absolute_import, division, print_function
 
 from codecs import StreamReader, open
+from distutils.version import LooseVersion
 from os.path import dirname, join, realpath
 
 from setuptools import setup
+from setuptools.version import __version__
 
-cwd = dirname(realpath(__file__))
+##
+# Because of the way we declare dependencies here, we need a more recent
+# version of setuptools.
+# https://www.python.org/dev/peps/pep-0508/#environment-markers
+if LooseVersion(__version__) < LooseVersion('20.5'):
+    raise EnvironmentError('Django Filters requires setuptools 20.5 or later.')
+
 
 ##
 # Load long description for PyPi.
-with open(join(cwd, 'README.rst'), 'r', 'utf-8') as f: # type: StreamReader
+readme = join(dirname(realpath(__file__)), 'README.rst')
+with open(readme, 'r', 'utf-8') as f: # type: StreamReader
     long_description = f.read()
 
 
