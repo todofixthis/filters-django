@@ -57,6 +57,10 @@ setup(
         'six',
     ],
 
+    extras_require = {
+        'test-runner': ['detox', 'django-nose'],
+    },
+
     license = 'MIT',
 
     classifiers = [

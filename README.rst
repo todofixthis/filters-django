@@ -3,6 +3,7 @@
 .. image:: https://readthedocs.org/projects/filters/badge/?version=latest
    :target: http://filters.readthedocs.io/
 
+
 ==============
 Django Filters
 ==============
@@ -10,7 +11,7 @@ Adds filters for for Django-specific features, including:
 
 - Search for a DB model instance matching the incoming value.
 
---------------------
+
 Minimum Requirements
 --------------------
 These filters *should* work with any version of Django, but they have only been
@@ -23,7 +24,7 @@ sure to indicate which version of Django you are using.
    The Django Filters project will continue to support Django 1.11 (and Python
    2) as long as that branch is officially-supported.
 
-------------
+
 Installation
 ------------
 This package is an extension for the `Filters library`, so you can install it
@@ -42,5 +43,27 @@ the package version separately from ``filters``.
    pip install filters-django
 
 
+Running Unit Tests
+------------------
+To run unit tests after installing from source::
+
+  pip install -e .[test-runner]
+  python manage.py test
+
+This project is also compatible with `tox`_, which will run the unit tests in
+different virtual environments (one for each supported version of Python).
+
+To run the unit tests, it is recommended that you use the `detox`_ library.
+detox speeds up the tests by running them in parallel.
+
+Install the package with the ``test-runner`` extra to set up the necessary
+dependencies, and then you can run the tests with the ``detox`` command::
+
+  pip install -e .[test-runner]
+  detox -v
+
+
 .. _Bug Tracker: https://github.com/eflglobal/filters-django/issues
 .. _Filters library: https://pypi.python.org/pypi/filters
+.. _detox: https://pypi.python.org/pypi/detox
+.. _tox: https://tox.readthedocs.io/

@@ -1,3 +1,0 @@
-# Additional dependencies that must be installed in order to run unit tests.
-.
-django-nose
