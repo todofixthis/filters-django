@@ -1,9 +1,9 @@
-dist: trusty
 language: python
 python:
-  - '2.7'
   - '3.5'
   - '3.6'
+  - '3.7'
+  - '3.8'
 
 install:
   - pip install '.[test-runner]'
@@ -14,11 +14,11 @@ script:
   - python manage.py test
 
 deploy:
-  - on:
-      python: '3.6'
-      tags: true
-    provider: pypi
-    distributions: 'bdist_wheel sdist'
-    user: efl_phx
-    password:
-      secure: wuAos26NLH8PNs0J9sWfWZ2JlTDPpPAoVwM6i8UJ4WhPLJiyEZPtC9UB8jOZx0NuVTD3JkW8x1cVGJz28YfVjDGGxQbkahn0PRnEGDngkgABeHoXSoayfVMYAne7EHRBqetvIkNhUfCpFTmlXuALIja1kMSgrHmevth6a8DKI5uwvvGorwWfcz5Un3+EHmf675M1y2rOCYTxQrQXTget6Ah5HWP0ivSR+ou3/4jQD9NAfNicoqMP8GY8b45t2iOKbnfEQX1LCjICcqLi98lCaJcfwXftCNBY4JLbL0Q1iG/VeNVvjru+i5f5TZdITEoL6iG0dOc0bXQjnscl+AtFjVU96wEHDGMBA/Vn9UtV6dvWbbntN27ZW64qi6H6ef0na/BQW+MmDvSzf5rj3XG1Yx4ON4ygppM3khRIZ8l+VNfpDki2B6t3eTorw4Gsup5B3oHibikcZ4QcwcXjeNWyGyuEo+eVxKO71NslRm5xAgYdYidl5swBcT4YOwWm3InzVA78GsbZq8Sq0E9iXHYSLzjHsq0XAg76jrmDjZN9f4xDZLuncS9y2mfhBXrajG/hvwAWt9XLdpl7qK4nEMcSRf6zSn1PLteP9imSj1fQJyNt1x5FOkGy9kiKSCI9Q6OfiSno6YpwryFRjEQQfz0h8s5+kbssy7hlSS410j2+5CU=
+  on:
+    python: '3.7'
+    tags: true
+  provider: pypi
+  user: phx
+  password:
+    secure: "sE0YKm3g4TJNnEXu5p3lY0dnv0Tpb4ZMkHF4334SPMf5h3ZmWAvkzM1q1gwdra8+hjfsPofhnmBtXTaWNgesES/Q8Y1kQFK3ou3QbEujorKWoJ/A2CBNdSri2XoYtvrKqG6n8jaaLxg60x4+pZBHoztrGBV8G6dEyaylGWsxy5D7zCfGiiFjBxRbQMFGpGnvjOKiYWc27t3Ky07UFQH+JaeCMYn6l1NL9KHyQ8FZLgzPLeuG+tIeusBMIUcHYr60ej4X8jqFKaIEf2x1Ma0oI79ZZhEmFfl/sKqsz2lM6uMekt9c3ruSxprnn9DmJ6Zyyh24fQNv6ReQ4zBZtLCamrL2JJvqt+/KQ7EYniSO2j2eqb33duXkuTOEjianVJeTJITvokXliR0h+a8YxWPV11vELlFGPPaIAhJtoYkcnfa/3kvaAR9eBqxY4GQPDIH0Rk8pIirOxuOicaZGxSgyci5enbzdJ2fuBEm/aH7sHiM8XzHPW5cD8q8tEwGEj2lPsFtCzNy1y8rkuEFVrMUIJvqxXgYKwPd42tkpOOBvHxMH9M1QyPs3Hy8akPfJHXoLFAcRrDvJqeh4AvtuEnwfj38kaPkvg0ru6WKipcoPx3hTl3Xub5tViWfdTEqXUqOn5rEGBht+mAsO6OZr0Z8dWjrm0IcJbSb4tGFU7cdEPIc="
+  distributions: 'bdist_wheel sdist'
