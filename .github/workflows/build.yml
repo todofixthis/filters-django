@@ -28,4 +28,4 @@ jobs:
           python -m pip install --upgrade pip
           pip install .
       - name: Run Tests
-        run: python -m unittest
+        run: python manage.py test
