@@ -2,7 +2,7 @@
 
 [project]
 name = "phx-filters-django"
-version = "3.0.0"
+version = "3.0.1"
 description = "Extends phx-filters, adding filters useful for Django applications."
 readme = "README.rst"
 requires-python = ">= 3.9"
