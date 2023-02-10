@@ -5,7 +5,7 @@ name = "phx-filters-django"
 version = "3.0.0"
 description = "Extends phx-filters, adding filters useful for Django applications."
 readme = "README.rst"
-requires-python = ">= 3.6"
+requires-python = ">= 3.9"
 license = { file = "LICENCE.txt" }
 authors = [
     { email = "Phoenix Zerin <phx@phx.nz>" }
