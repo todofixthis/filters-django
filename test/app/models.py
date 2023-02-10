@@ -1,5 +1,5 @@
 """
-Defines a few (slightly silly) Django models that we can use in unit tests.
+Defines a (slightly silly) Django model that we can use in unit tests.
 """
 from django.db import models
 
@@ -23,7 +23,7 @@ class Specie(models.Model):
         null=True,
     )
 
-    color = models.CharField(
+    colour = models.CharField(
         max_length=24,
         default='green',
     )
