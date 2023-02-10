@@ -31,7 +31,7 @@ classifiers = [
 ]
 
 dependencies = [
-    'phx-filters',
+    'phx-filters >= 3.0',
     'Django >= 4.0'
 ]
 
