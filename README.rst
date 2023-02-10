@@ -7,7 +7,7 @@ Django Filters
 ==============
 Adds filters for for Django-specific features, including:
 
-- `filters.ext.Model`: Search for a DB model instance matching the incoming
+- ``filters.ext.Model``: Search for a DB model instance matching the incoming
   value.
 
 
