@@ -7,8 +7,8 @@ Django Filters
 ==============
 Adds filters for for Django-specific features, including:
 
-- :py:class:`filters.ext.Model`: Search for a DB model instance matching the
-  incoming value.
+- `filters.ext.Model`: Search for a DB model instance matching the incoming
+  value.
 
 
 Requirements
