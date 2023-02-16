@@ -1,4 +1,4 @@
-.. image:: https://github.com/todofixthis/filters-django/actions/workflows/build/badge.svg
+.. image:: https://github.com/todofixthis/filters-django/actions/workflows/build.yml/badge.svg
    :target: https://github.com/todofixthis/filters-django/actions/workflows/build.yml
 .. image:: https://readthedocs.org/projects/filters/badge/?version=latest
    :target: http://filters.readthedocs.io/
