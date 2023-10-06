@@ -1,11 +1,11 @@
-.. image:: https://github.com/todofixthis/filters-django/actions/workflows/build/badge.svg
+.. image:: https://github.com/todofixthis/filters-django/actions/workflows/build.yml/badge.svg
    :target: https://github.com/todofixthis/filters-django/actions/workflows/build.yml
 .. image:: https://readthedocs.org/projects/filters/badge/?version=latest
-   :target: http://filters.readthedocs.io/
+   :target: https://filters.readthedocs.io/en/latest/extension_filters.html#django-filters
 
 Django Filters
 ==============
-Adds filters for for Django-specific features, including:
+Adds `filters`_ for for Django-specific features, including:
 
 - ``filters.ext.Model``: Search for a DB model instance matching the incoming
   value.
@@ -15,9 +15,9 @@ Requirements
 ------------
 Django Filters is known to be compatible with the following Python versions:
 
+- 3.12
 - 3.11
 - 3.10
-- 3.9
 
 Only Django v4.x is supported.
 
@@ -28,8 +28,8 @@ Only Django v4.x is supported.
    and/or Django not listed here — there just won't be any test coverage to
    prove it 😇
 
-If you encounter any issues, please report them on our `Bug Tracker`_, and be
-sure to indicate which version of Django you are using.
+If you encounter any issues, please report them on the project's `Bug Tracker`_,
+and be sure to indicate which version of Django you are using.
 
 Installation
 ------------
@@ -133,8 +133,9 @@ Steps to build releases are based on `Packaging Python Projects Tutorial`_
 #. Attach the build artefacts to the release.
 #. Click ``Publish release``.
 
-.. _Bug Tracker: https://github.com/eflglobal/filters-django/issues
+.. _Bug Tracker: https://github.com/todofixthis/filters-django/issues
 .. _Create a PyPI API token: https://pypi.org/manage/account/token/
+.. _filters: http://filters.readthedocs.io/
 .. _Filters library: https://pypi.python.org/pypi/phx-filters
 .. _Packaging Python Projects Tutorial: https://packaging.python.org/en/latest/tutorials/packaging-projects/
 .. _phx-filters repo: https://github.com/todofixthis/filters/blob/develop/docs/extension_filters.rst
