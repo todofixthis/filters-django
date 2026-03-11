@@ -1,5 +1,8 @@
 # :see: https://peps.python.org/pep-0621/
 
+[dependency-groups]
+dev = ["tox"]
+
 [project]
 name = "phx-filters-django"
 version = "3.1.0"
@@ -39,13 +42,17 @@ dependencies = [
 [project.entry-points."filters.extensions"]
 Model = "filters_django:Model"
 
-[project.optional-dependencies]
-# Utilities for Project Maintainers
-"build-system" = ["build", "twine"]
-"test-runner" = ["tox"]
-
 [project.urls]
 Documentation = "https://filters.readthedocs.io/en/latest/extension_filters.html#django-filters"
 Changelog = "https://github.com/todofixthis/filters-django/releases"
 Issues = "https://github.com/todofixthis/filters-django/issues"
 Repository = "https://github.com/todofixthis/filters-django"
+
+[tool.tox]
+env_list = ["py310", "py311", "py312"]
+
+[tool.tox.env_run_base]
+commands = [["python", "manage.py", "test"]]
+
+[tool.uv]
+keyring-provider = "subprocess"
