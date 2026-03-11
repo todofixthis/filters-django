@@ -1,5 +1,9 @@
 # :see: https://peps.python.org/pep-0621/
 
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
 [dependency-groups]
 dev = ["tox"]
 
@@ -11,7 +15,7 @@ readme = "README.rst"
 requires-python = ">= 3.12"
 license = { file = "LICENCE.txt" }
 authors = [
-    { email = "Phoenix Zerin <phx@phx.nz>" }
+    { name = "Phoenix Zerin", email = "phx@phx.nz" }
 ]
 
 keywords = [
@@ -47,6 +51,9 @@ Documentation = "https://filters.readthedocs.io/en/latest/extension_filters.html
 Changelog = "https://github.com/todofixthis/filters-django/releases"
 Issues = "https://github.com/todofixthis/filters-django/issues"
 Repository = "https://github.com/todofixthis/filters-django"
+
+[tool.hatch.build.targets.wheel]
+packages = ["filters_django"]
 
 [tool.tox]
 env_list = ["py312", "py313", "py314"]

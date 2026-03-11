@@ -97,7 +97,7 @@ wheels = [
 [[package]]
 name = "phx-filters-django"
 version = "3.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "django" },
     { name = "phx-filters" },
