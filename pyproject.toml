@@ -8,7 +8,7 @@ name = "phx-filters-django"
 version = "3.1.0"
 description = "Extends phx-filters, adding filters useful for Django applications."
 readme = "README.rst"
-requires-python = ">= 3.10"
+requires-python = ">= 3.12"
 license = { file = "LICENCE.txt" }
 authors = [
     { email = "Phoenix Zerin <phx@phx.nz>" }
@@ -27,8 +27,8 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Software Development :: Libraries :: Python Modules",
     'Topic :: Text Processing :: Filters',
 ]
@@ -49,7 +49,7 @@ Issues = "https://github.com/todofixthis/filters-django/issues"
 Repository = "https://github.com/todofixthis/filters-django"
 
 [tool.tox]
-env_list = ["py310", "py311", "py312"]
+env_list = ["py312", "py313", "py314"]
 
 [tool.tox.env_run_base]
 commands = [["python", "manage.py", "test"]]
