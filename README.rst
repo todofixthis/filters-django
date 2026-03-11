@@ -19,12 +19,12 @@ Django Filters is known to be compatible with the following Python versions:
 - 3.13
 - 3.12
 
-Only Django v4.x is supported.
+Only `Django LTS versions`_ are supported.
 
 .. note::
    I'm only one person, so to keep from getting overwhelmed, I'm only committing
-   to supporting the 3 most recent minor versions of Python and the most recent
-   major version of Django.  Django Filters may work with versions of Python
+   to supporting the 3 most recent minor versions of Python and current Django
+   LTS versions.  Django Filters may work with versions of Python
    and/or Django not listed here — there just won't be any test coverage to
    prove it 😇
 
@@ -132,6 +132,7 @@ Paste your ``pypi-...`` token when prompted.
 #. Attach the build artefacts to the release.
 #. Click ``Publish release``.
 
+.. _Django LTS versions: https://www.djangoproject.com/download/#supported-versions
 .. _PyPI API token: https://pypi.org/manage/account/#api-tokens
 .. _filters: https://filters.readthedocs.io/
 .. _Filters library: https://pypi.python.org/pypi/phx-filters
