@@ -10,6 +10,8 @@ dev = [
     "autohooks-plugin-black>=23,<24",
     "autohooks-plugin-ruff>=25,<26",
     "black>=26,<27",
+    "pytest>=9,<10",
+    "pytest-django>=4,<5",
     "pyyaml>=6.0.3",
     "tox>=4,<5",
 ]
@@ -70,11 +72,16 @@ pre-commit = [
 [tool.hatch.build.targets.wheel]
 packages = ["src/filters_django"]
 
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "test.settings"
+pythonpath = ["."]
+testpaths = ["test"]
+
 [tool.tox]
 env_list = ["py312", "py313", "py314"]
 
 [tool.tox.env_run_base]
-commands = [["python", "manage.py", "test"]]
+commands = [["pytest"]]
 
 [tool.uv]
 keyring-provider = "subprocess"
