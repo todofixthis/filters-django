@@ -1,17 +1,15 @@
 # CLAUDE.md
 
-## Git
-
-Always use `uv run git commit` (not `git commit`) so that autohooks run correctly. The `creative-commits` skill still applies.
-
 ## Commands
 
 ```bash
-uv run tox -p                                                    # all Python versions, parallel
-uv run python manage.py test                                     # current virtualenv only
-uv run python manage.py test test.app.test_filters_django.<Test>.<method>  # single test
+uv run autohooks activate --mode=pythonpath                      # install pre-commit hook (once per clone)
+uv run git commit                                                # always use instead of git commit (runs autohooks)
 uv add <package>                                                 # add a runtime dependency
 uv add --group dev <package>                                     # add a dev dependency
+uv run python manage.py test                                     # run tests (current virtualenv)
+uv run python manage.py test test.app.test_filters_django.<Test>.<method>  # single test
+uv run tox -p                                                    # test across all supported Python versions
 ```
 
 ## Architecture
