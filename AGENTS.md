@@ -1,4 +1,16 @@
-# CLAUDE.md
+## Getting Started
+
+Before writing code, check:
+
+- `docs/plans/` — current implementation plan
+- `docs/adr/INDEX.md` — prior decisions (don't re-litigate)
+- `docs/future/` — deferred features (don't re-discuss)
+
+## Architecture Decision Records
+
+When making significant decisions — choosing between libraries, patterns, tools, or conventions — you **must** write an ADR before implementing the decision. Use the `writing-adrs` skill for the format and conventions. ADRs live in `docs/adr/`. Before writing, run `ls docs/adr/` to find the highest existing number and increment it.
+
+If you find yourself about to establish a new cross-cutting pattern (something that will affect multiple domains or files, e.g. a testing convention, a shared utility, an error-handling approach), stop and write an ADR first even if the immediate task feels local. A pattern adopted once becomes the template for everything that follows.
 
 ## Commands
 
@@ -21,3 +33,29 @@ Single-module library (`src/filters_django/__init__.py`) that extends [`phx-filt
 Registered as a `phx-filters` extension via the `filters.extensions` entry point, making it available as `filters.ext.Model`.
 
 `test/` is a minimal Django app for testing only — in-memory SQLite, with a `Specie` model used throughout the test suite.
+
+## Docstrings
+
+Google/Napoleon format (`Args:`, `Returns:`, `Note:`) — not Sphinx `:param:` style. Max 80 chars per line. Escape backslashes (e.g. `'\\n'` not `'\n'`). Blank line before lists inside `Args:` sections to avoid Sphinx indentation warnings. ReadTheDocs treats all Sphinx warnings as errors — resolve them before pushing.
+
+## Code Comments
+
+Place comments on the line preceding the code they document, not as trailing comments.
+
+## Language and Style
+
+- Alphabetise `pyproject.toml` sections and keys within sections
+- NZ English; incorporate Te Reo Māori where natural (e.g. "mahi", "kaupapa")
+- Use "Initialises" not "Initializes"
+
+## Branches
+
+- `main` — releases only; merge from `develop` via PR
+- `develop` — main development branch
+- Feature branches off `develop` for all new work
+
+## Git Worktrees
+
+Use `.worktrees/` for isolated workspaces (project-local, gitignored).
+
+After switching to a worktree, run the autohooks activate command (see Commands) to install the pre-commit hook for that worktree.
