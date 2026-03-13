@@ -10,6 +10,8 @@ Always use `uv run git commit` (not `git commit`) so that autohooks run correctl
 uv run tox -p                                                    # all Python versions, parallel
 uv run python manage.py test                                     # current virtualenv only
 uv run python manage.py test test.app.test_filters_django.<Test>.<method>  # single test
+uv add <package>                                                 # add a runtime dependency
+uv add --group dev <package>                                     # add a dev dependency
 ```
 
 ## Architecture

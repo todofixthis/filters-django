@@ -5,7 +5,14 @@ build-backend = "hatchling.build"
 requires = ["hatchling"]
 
 [dependency-groups]
-dev = ["tox"]
+dev = [
+    "autohooks>=26,<27",
+    "autohooks-plugin-black>=23,<24",
+    "autohooks-plugin-ruff>=25,<26",
+    "black>=26,<27",
+    "pyyaml>=6.0.3",
+    "tox>=4,<5",
+]
 
 [project]
 name = "phx-filters-django"
@@ -51,6 +58,14 @@ Documentation = "https://filters.readthedocs.io/en/latest/extension_filters.html
 Changelog = "https://github.com/todofixthis/filters-django/releases"
 Issues = "https://github.com/todofixthis/filters-django/issues"
 Repository = "https://github.com/todofixthis/filters-django"
+
+[tool.autohooks]
+mode = "pythonpath"
+pre-commit = [
+    "adr_index",
+    "autohooks.plugins.black",
+    "autohooks.plugins.ruff",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/filters_django"]
