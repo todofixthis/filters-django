@@ -74,6 +74,11 @@ What follows — positive and negative.
 - **Number sequentially** — never reuse or renumber
 - **Supersede, don't edit** — new ADR for changed decisions; mark the old one superseded
 - **Keep it concise** — enough to reconstruct the reasoning, not a thesis
+- **Each section has a distinct job — don't let them overlap:**
+  - _Context_ — the problem and forces; stop before proposing any remedy
+  - _Options_ — approaches and trade-offs; don't restate what Context already said
+  - _Decision_ — why this option over others; don't re-describe the chosen option (Options already did that)
+  - _Consequences_ — what changes or must be managed downstream; not a restatement of the accepted option's pros/cons
 
 ## Supersession Workflow
 
