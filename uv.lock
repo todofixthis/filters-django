@@ -425,7 +425,7 @@ wheels = [
 
 [[package]]
 name = "phx-filters-django"
-version = "3.2.0"
+version = "3.3.0"
 source = { editable = "." }
 dependencies = [
     { name = "django" },
@@ -446,7 +446,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "django", specifier = ">=4.0" },
+    { name = "django", specifier = ">=4.2" },
     { name = "phx-filters", specifier = ">=3.4.0" },
 ]
 
