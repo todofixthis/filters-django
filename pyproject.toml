@@ -48,7 +48,7 @@ classifiers = [
 
 dependencies = [
     'phx-filters >= 3.4.0',
-    'Django >= 4.0'
+    'Django >= 4.2'
 ]
 
 # https://filters.readthedocs.io/en/latest/extensions.html#registering-your-filters
@@ -81,6 +81,7 @@ testpaths = ["test"]
 env_list = ["py312", "py313", "py314"]
 
 [tool.tox.env_run_base]
+allowlist_externals = ["pytest"]
 commands = [["pytest"]]
 
 [tool.uv]

@@ -446,7 +446,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "django", specifier = ">=4.0" },
+    { name = "django", specifier = ">=4.2" },
     { name = "phx-filters", specifier = ">=3.4.0" },
 ]
 
