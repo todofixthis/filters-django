@@ -10,6 +10,8 @@ dev = [
     "autohooks-plugin-black>=23,<24",
     "autohooks-plugin-ruff>=25,<26",
     "black>=26,<27",
+    # >=3.29 fixes an OSError on Docker/macOS volume mounts (fcntl file locking)
+    "filelock>=3.29",
     "pytest>=9,<10",
     "pytest-django>=4,<5",
     "pyyaml>=6.0.3",
@@ -18,7 +20,7 @@ dev = [
 
 [project]
 name = "phx-filters-django"
-version = "3.3.0"
+version = "4.0.0"
 description = "Extends phx-filters, adding filters useful for Django applications."
 readme = "README.rst"
 requires-python = ">= 3.12"
@@ -48,7 +50,7 @@ classifiers = [
 
 dependencies = [
     'phx-filters >= 3.4.0',
-    'Django >= 4.2'
+    'Django >= 5.2'
 ]
 
 # https://filters.readthedocs.io/en/latest/extensions.html#registering-your-filters
