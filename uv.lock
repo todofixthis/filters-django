@@ -173,11 +173,11 @@ wheels = [
 
 [[package]]
 name = "filelock"
-version = "3.25.1"
+version = "3.29.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/b3/8b/4c32ecde6bea6486a2a5d05340e695174351ff6b06cf651a74c005f9df00/filelock-3.25.1.tar.gz", hash = "sha256:b9a2e977f794ef94d77cdf7d27129ac648a61f585bff3ca24630c1629f701aa9", size = 40319, upload-time = "2026-03-09T19:38:47.309Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b5/fe/997687a931ab51049acce6fa1f23e8f01216374ea81374ddee763c493db5/filelock-3.29.0.tar.gz", hash = "sha256:69974355e960702e789734cb4871f884ea6fe50bd8404051a3530bc07809cf90", size = 57571, upload-time = "2026-04-19T15:39:10.068Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a9/b8/2f664b56a3b4b32d28d3d106c71783073f712ba43ff6d34b9ea0ce36dc7b/filelock-3.25.1-py3-none-any.whl", hash = "sha256:18972df45473c4aa2c7921b609ee9ca4925910cc3a0fb226c96b92fc224ef7bf", size = 26720, upload-time = "2026-03-09T19:38:45.718Z" },
+    { url = "https://files.pythonhosted.org/packages/81/47/dd9a212ef6e343a6857485ffe25bba537304f1913bdbed446a23f7f592e1/filelock-3.29.0-py3-none-any.whl", hash = "sha256:96f5f6344709aa1572bbf631c640e4ebeeb519e08da902c39a001882f30ac258", size = 39812, upload-time = "2026-04-19T15:39:08.752Z" },
 ]
 
 [[package]]
@@ -438,6 +438,7 @@ dev = [
     { name = "autohooks-plugin-black" },
     { name = "autohooks-plugin-ruff" },
     { name = "black" },
+    { name = "filelock" },
     { name = "pytest" },
     { name = "pytest-django" },
     { name = "pyyaml" },
@@ -456,6 +457,7 @@ dev = [
     { name = "autohooks-plugin-black", specifier = ">=23,<24" },
     { name = "autohooks-plugin-ruff", specifier = ">=25,<26" },
     { name = "black", specifier = ">=26,<27" },
+    { name = "filelock", specifier = ">=3.29" },
     { name = "pytest", specifier = ">=9,<10" },
     { name = "pytest-django", specifier = ">=4,<5" },
     { name = "pyyaml", specifier = ">=6.0.3" },
