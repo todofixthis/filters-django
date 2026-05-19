@@ -1,26 +1,18 @@
-# Django
-*.log
-local_settings.py
-
 # Distribution / packaging
 *.egg
 *.egg-info/
 dist/
 
-# Environment
-.env
-.python-version
-.venv/
-venv/
+# Django
+*.log
+local_settings.py
+
+# Git worktrees
+.worktrees
 
 # Python
 *.py[cod]
 __pycache__/
 
 # Testing
-.cache
-.coverage
-.coverage.*
-.tox/
-coverage.xml
-htmlcov/
+.tox
