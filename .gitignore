@@ -1,5 +1,8 @@
+# Byte-compiled / optimised / DLL files
+*.py[cod]
+__pycache__/
+
 # Distribution / packaging
-*.egg
 *.egg-info/
 dist/
 
@@ -8,11 +11,12 @@ dist/
 local_settings.py
 
 # Git worktrees
-.worktrees
+.worktrees/
 
-# Python
-*.py[cod]
-__pycache__/
+# Release artefacts (local working files)
+release-*-body.md
+release-*.md
+release-*.md.asc
 
 # Testing
 .tox
