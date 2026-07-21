@@ -11,7 +11,8 @@ dist/
 local_settings.py
 
 # Git worktrees
-.worktrees/
+.agents/worktrees/
+.claude/worktrees/
 
 # Release artefacts (local working files)
 release-*-body.md
