@@ -62,6 +62,8 @@ Place comments on the line preceding the code they document, not as trailing com
 
 ## Git Worktrees
 
-Use `.worktrees/` for isolated workspaces (project-local, gitignored).
+Use `.claude/worktrees/` for isolated workspaces (project-local, gitignored).
 
 After switching to a worktree, run the autohooks activate command (see Commands) to install the pre-commit hook for that worktree.
+
+Keep `.claude/` a real directory — only `.claude/skills` is a symlink into `.agents/skills`. If `.claude` itself becomes a symlink, the native worktree tooling refuses to run.
