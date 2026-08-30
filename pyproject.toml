@@ -89,4 +89,4 @@ commands = [["pytest"]]
 [tool.uv]
 keyring-provider = "subprocess"
 # Fix SSL errors when running in Leash containers
-system-certs = true
+native-tls = true
