@@ -1,5 +1,20 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "git-tags",
+      "depNameTemplate": "phx-claude-siat",
+      "description": "phx-adr pin in the adrs CI job (ADR 001)",
+      "managerFilePatterns": [
+        "/^\\.github/workflows/build\\.yml$/"
+      ],
+      "matchStrings": [
+        "# phx-claude-siat v?(?<currentValue>\\d[^\\s,]*\\d)[^\\n]*\\n(?:\\s*#[^\\n]*\\n)*\\s*run: uvx --from ['\"]git\\+https://github\\.com/todofixthis/phx-claude-siat@(?<currentDigest>[0-9a-f]{40})"
+      ],
+      "packageNameTemplate": "https://github.com/todofixthis/phx-claude-siat"
+    }
+  ],
   "extends": [
     "config:recommended",
     "helpers:pinGitHubActionDigests"

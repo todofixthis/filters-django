@@ -1,7 +1,7 @@
 ---
 status: Accepted
 date: 2026-10-07
-scope: [.claude/settings.json, .github/workflows/, AGENTS.md, docs/adr/, pyproject.toml]
+scope: [.claude/settings.json, .github/workflows/, AGENTS.md, docs/adr/, pyproject.toml, renovate.json]
 summary: Index, validate and look up ADRs with the phx writing-adrs tool, through the plugin's hooks in sessions and its phx-adr entry point at a pinned release in CI, not a repo-local generator, pre-commit hook or vendored copy.
 revisit-when: A phx plugin release imposes an ADR convention the maintainer rejects; ADRs here are regularly authored outside a Claude Code session with the plugin; plugin releases routinely outrun the pin and leave CI red; the phx plugin drops its ADR tooling.
 ---
@@ -47,11 +47,14 @@ the plugin at a pinned release's commit.
 
 **Cons:** No local check blocks a commit; a fault from outside Claude Code is caught only once
 pushed. Outside Claude Code nothing allocates a number or regenerates the index, so the author
-runs `phx-adr` by hand. The pinned ref has to be bumped by hand: Renovate has no manager
-for a `uvx --from git+…@sha` line without a custom regex manager, not set up here.
+runs `phx-adr` by hand. No stock Renovate manager recognises a `uvx --from git+…@sha` line,
+so keeping the pin current needs a custom one.
 **Risks:** Sessions load whatever plugin release is installed, not the pinned one. A release
 that changes the index format leaves CI reporting the index stale right after a session
-regenerates it, until the pin catches up.
+regenerates it, until the pin's update is merged; a merged update ahead of a session's
+installed plugin does the same in reverse. An edit to the pinned line that breaks the
+custom manager's match stops the pin moving without any error; the Dependency Dashboard's
+detected dependencies are the only place the loss shows.
 
 ### Option 3: The plugin's hooks alone
 
@@ -86,9 +89,11 @@ which made the same move.
   plugin's hooks on here.
 - `scripts/`, its tests, the `adr_index` hook (and with it `.autohooks/`), and PyYAML (the
   generator was its only user) are removed.
-- The CI `adrs` job and `AGENTS.md`'s `phx-adr` commands pin the 8.1.0 release's commit.
-  Bump both when sessions move to a new plugin release, and fix whatever the new release
-  reports in the same change.
+- The `adrs` job pins the 8.1.0 release's commit, with the version in a comment above it;
+  `AGENTS.md`'s `phx-adr` commands read the ref from that job rather than repeat it. A
+  `renovate.json` custom manager (`git-tags` datasource) matches the pair and proposes each
+  new phx release, bumping version and commit together. Fix whatever the new release
+  reports in that update's pull request.
 - The plugin is Claude Code's, so an agent in another harness gets no session hooks, and
   meets the conventions only through `AGENTS.md`, the skill and CI.
 
