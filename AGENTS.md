@@ -8,7 +8,7 @@ Before writing code, check:
 
 ## Architecture Decision Records
 
-When making significant decisions — choosing between libraries, patterns, tools, or conventions — you **must** write an ADR before implementing the decision. Use the `writing-adrs` skill for the format and conventions. ADRs live in `docs/adr/`. Before writing, run `ls docs/adr/` to find the highest existing number and increment it.
+When making significant decisions — choosing between libraries, patterns, tools, or conventions — you **must** write an ADR before implementing the decision. Use the `phx:writing-adrs` skill (from the phx plugin, which `.claude/settings.json` enables) for the format, conventions and tooling: its `adr.py` allocates the number, generates `docs/adr/INDEX.md` and validates the corpus. Where `phx:writing-adrs` is unavailable (another harness, or the plugin not installed), follow [its SKILL.md](https://github.com/todofixthis/phx-claude-siat/blob/0725567cec6bab6a227c2a3d569e64c226c33a4e/skills/writing-adrs/SKILL.md) and run the same tool as `phx-adr` (see Commands). Don't hand-edit the index or add a repo-local ADR script (ADR 001). ADRs live in `docs/adr/`.
 
 If you find yourself about to establish a new cross-cutting pattern (something that will affect multiple domains or files, e.g. a testing convention, a shared utility, an error-handling approach), stop and write an ADR first even if the immediate task feels local. A pattern adopted once becomes the template for everything that follows.
 
@@ -23,6 +23,19 @@ uv run pytest                                   # run tests (current virtualenv)
 uv run pytest test/app/test_model.py::test_name # single test
 uv run tox -p                                   # test across all supported Python versions
 ```
+
+The phx plugin's ADR tool, for use where the skill is unavailable (keep these refs in step with the `adrs` CI job):
+
+```bash
+# Scaffold the next ADR
+uvx --from 'git+https://github.com/todofixthis/phx-claude-siat@0725567cec6bab6a227c2a3d569e64c226c33a4e#subdirectory=skills/writing-adrs' phx-adr new "Title" --summary "…" --scope path/
+# Regenerate docs/adr/INDEX.md
+uvx --from 'git+https://github.com/todofixthis/phx-claude-siat@0725567cec6bab6a227c2a3d569e64c226c33a4e#subdirectory=skills/writing-adrs' phx-adr index
+# Validate, as CI does
+uvx --from 'git+https://github.com/todofixthis/phx-claude-siat@0725567cec6bab6a227c2a3d569e64c226c33a4e#subdirectory=skills/writing-adrs' phx-adr check
+```
+
+If the `adrs` job reports the index stale right after a session regenerated it, the installed plugin has outrun the pin: bump every pinned ref (here, in the SKILL.md link and in the `adrs` job) to the installed release's commit (`<tag>^{commit}`; the version is in the plugin's `plugin.json`). Don't regenerate the index with the old pin.
 
 ## Architecture
 
