@@ -8,7 +8,7 @@ Before writing code, check:
 
 ## Architecture Decision Records
 
-When making significant decisions — choosing between libraries, patterns, tools, or conventions — you **must** write an ADR before implementing the decision. Use the `writing-adrs` skill for the format and conventions. ADRs live in `docs/adr/`. Before writing, run `ls docs/adr/` to find the highest existing number and increment it.
+When making significant decisions — choosing between libraries, patterns, tools, or conventions — you **must** write an ADR before implementing the decision. Use the `phx:writing-adrs` skill (from the phx plugin, which `.claude/settings.json` enables) for the format, conventions and tooling: its `adr.py` allocates the number, generates `docs/adr/INDEX.md` and validates the corpus. Where `phx:writing-adrs` is unavailable (another harness, or the plugin not installed), follow its SKILL.md (`https://github.com/todofixthis/phx-claude-siat/blob/<version>/skills/writing-adrs/SKILL.md`, at the version the `adrs` CI job pins) and run the same tool as `phx-adr` (see Commands). Don't hand-edit the index or add a repo-local ADR script (ADR 001). ADRs live in `docs/adr/`.
 
 If you find yourself about to establish a new cross-cutting pattern (something that will affect multiple domains or files, e.g. a testing convention, a shared utility, an error-handling approach), stop and write an ADR first even if the immediate task feels local. A pattern adopted once becomes the template for everything that follows.
 
@@ -23,6 +23,19 @@ uv run pytest                                   # run tests (current virtualenv)
 uv run pytest test/app/test_model.py::test_name # single test
 uv run tox -p                                   # test across all supported Python versions
 ```
+
+The phx plugin's ADR tool, for use where the skill is unavailable. The pin lives only in the `adrs` CI job, which Renovate bumps; each command reads it from there, so run it from the repo root:
+
+```bash
+# Scaffold the next ADR
+uvx --from "$(rg -o -m1 'git\+https://github\.com/todofixthis/phx-claude-siat@[0-9a-f]{40}#subdirectory=skills/writing-adrs' .github/workflows/build.yml)" phx-adr new "Title" --summary "…" --scope path/
+# Regenerate docs/adr/INDEX.md
+uvx --from "$(rg -o -m1 'git\+https://github\.com/todofixthis/phx-claude-siat@[0-9a-f]{40}#subdirectory=skills/writing-adrs' .github/workflows/build.yml)" phx-adr index
+# Validate, as CI does
+uvx --from "$(rg -o -m1 'git\+https://github\.com/todofixthis/phx-claude-siat@[0-9a-f]{40}#subdirectory=skills/writing-adrs' .github/workflows/build.yml)" phx-adr check
+```
+
+If the `adrs` job reports the index stale, compare the installed plugin's version (its `plugin.json`) with the one in the `adrs` job's comment. With no plugin installed, or where they match (an ADR edited from the shell skips the plugin's hook), regenerate with the pinned `phx-adr index` above. Where the plugin is newer, bump the job's version and commit (`git ls-remote https://github.com/todofixthis/phx-claude-siat 'refs/tags/<version>^{}'`) on your branch; the index your session wrote already matches it. Renovate's own pull request for that release stays red until its index is regenerated with the new pin. Where the pin is newer, run the pinned `phx-adr index` after your last ADR edit, just before committing, since the older plugin's hook rewrites the index after every file-tool edit; updating the plugin is the maintainer's fix. Never move the pin backwards.
 
 ## Architecture
 
