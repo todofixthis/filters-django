@@ -3,27 +3,33 @@ Note: most of the animals referenced in these tests are cuddly because,
 let's face it, those are more fun to research (:
 """
 
-import pytest
 import filters as f
+import pytest
 
-from test.app.models import Specie
+from django_test_project.app.models import Specie
+from filters_django import Model
 
 pytestmark = pytest.mark.django_db
 
 
-def test_pass_none():
+def test_registered_as_extension() -> None:
+    """``f.ext.Model`` resolves to this package's filter through its entry point."""
+    assert f.ext.Model is Model
+
+
+def test_pass_none() -> None:
     """
     ``None`` always passes this filter.
 
     Chain with ``Required`` to reject null values.
     """
-    runner = f.FilterRunner(f.ext.Model(Specie), None)
+    runner = f.FilterRunner(Model(Specie), None)
     assert not runner.has_exceptions
     assert runner.is_valid()
     assert runner.cleaned_data is None
 
 
-def test_pass_pk_match():
+def test_pass_pk_match() -> None:
     """
     The incoming value matches the PK of an existing record.
     """
@@ -34,24 +40,24 @@ def test_pass_pk_match():
         is_cuddly=True,
     )
 
-    runner = f.FilterRunner(f.ext.Model(Specie), target_specie.pk)
+    runner = f.FilterRunner(Model(Specie), target_specie.pk)
     assert not runner.has_exceptions
     assert runner.is_valid()
     assert isinstance(runner.cleaned_data, Specie)
     assert runner.cleaned_data == target_specie
 
 
-def test_fail_no_pk_match():
+def test_fail_no_pk_match() -> None:
     """
     The incoming value does not match the PK of any existing records.
     """
-    runner = f.FilterRunner(f.ext.Model(Specie), 42)
+    runner = f.FilterRunner(Model(Specie), 42)
     assert not runner.has_exceptions
     assert not runner.is_valid()
-    assert runner.error_codes == {"": [f.ext.Model.CODE_NOT_FOUND]}
+    assert runner.error_codes == {"": [Model.CODE_NOT_FOUND]}
 
 
-def test_pass_alternate_field_match():
+def test_pass_alternate_field_match() -> None:
     """
     You can configure the constraint to match a value other than PK.
     """
@@ -62,7 +68,7 @@ def test_pass_alternate_field_match():
         is_cuddly=False,
     )
 
-    runner = f.FilterRunner(f.ext.Model(Specie, field="common_name"))
+    runner = f.FilterRunner(Model(Specie, field="common_name"))
 
     runner.apply(target_specie.common_name)
     assert not runner.has_exceptions
@@ -75,10 +81,10 @@ def test_pass_alternate_field_match():
     runner.apply(target_specie.pk)
     assert not runner.has_exceptions
     assert not runner.is_valid()
-    assert runner.error_codes == {"": [f.ext.Model.CODE_NOT_FOUND]}
+    assert runner.error_codes == {"": [Model.CODE_NOT_FOUND]}
 
 
-def test_fail_too_many_matches():
+def test_fail_too_many_matches() -> None:
     """
     The incoming value matches more than one record.
     """
@@ -96,16 +102,16 @@ def test_fail_too_many_matches():
         is_cuddly=True,
     )
 
-    runner = f.FilterRunner(f.ext.Model(Specie, field="is_cuddly"))
+    runner = f.FilterRunner(Model(Specie, field="is_cuddly"))
 
     runner.apply(True)
     assert not runner.has_exceptions
     assert not runner.is_valid()
-    assert runner.error_codes == {"": [f.ext.Model.CODE_NOT_UNIQUE]}
+    assert runner.error_codes == {"": [Model.CODE_NOT_UNIQUE]}
 
 
 # noinspection SpellCheckingInspection
-def test_predicates():
+def test_predicates() -> None:
     """
     You can use ``predicates`` to specify additional filters to add to the
     query.
@@ -118,7 +124,7 @@ def test_predicates():
 
     # Note that without any predicates, the filter will find our specie
     # just fine.
-    runner = f.FilterRunner(f.ext.Model(Specie), target_specie.pk)
+    runner = f.FilterRunner(Model(Specie), target_specie.pk)
     assert not runner.has_exceptions
     assert runner.is_valid()
     assert isinstance(runner.cleaned_data, Specie)
@@ -127,15 +133,15 @@ def test_predicates():
     # However, if we add a predicate that restricts the search to
     # non-cuddlies, the input is no longer valid.
     runner = f.FilterRunner(
-        f.ext.Model(Specie, filter={"is_cuddly": False}),
+        Model(Specie, filter={"is_cuddly": False}),
         target_specie.pk,
     )
     assert not runner.has_exceptions
     assert not runner.is_valid()
-    assert runner.error_codes == {"": [f.ext.Model.CODE_NOT_FOUND]}
+    assert runner.error_codes == {"": [Model.CODE_NOT_FOUND]}
 
 
-def test_error_predicate_invalid():
+def test_error_predicate_invalid() -> None:
     """
     Predicates must return :py:class:`django.db.models.query.QuerySet`
     objects, or else they are invalid.
@@ -151,7 +157,7 @@ def test_error_predicate_invalid():
     runner = f.FilterRunner(
         # ``QuerySet.count()`` does not return a ``QuerySet`` instance, so
         # it is not a valid predicate.
-        f.ext.Model(Specie, count=()),
+        Model(Specie, count=()),
         target_specie.pk,
     )
     assert runner.has_exceptions
@@ -160,7 +166,7 @@ def test_error_predicate_invalid():
     assert runner.error_codes == {"": [f.BaseFilter.CODE_EXCEPTION]}
 
 
-def test_pass_predicate_side_effects():
+def test_pass_predicate_side_effects() -> None:
     """
     Reckless use of predicates that trigger write queries may result in
     side effects.
@@ -173,7 +179,7 @@ def test_pass_predicate_side_effects():
     )
 
     runner = f.FilterRunner(
-        f.ext.Model(Specie, update={"is_cuddly": False}),
+        Model(Specie, update={"is_cuddly": False}),
         target_specie.pk,
     )
     assert runner.has_exceptions

@@ -1,55 +1,34 @@
-# :see: https://peps.python.org/pep-0621/
-
 [build-system]
-build-backend = "hatchling.build"
 requires = ["hatchling"]
-
-[dependency-groups]
-dev = [
-    "autohooks>=26,<27",
-    "autohooks-plugin-black>=23,<24",
-    "autohooks-plugin-ruff>=25,<26",
-    "black>=26,<27",
-    # >=3.29 fixes an OSError on Docker/macOS volume mounts (fcntl file locking)
-    "filelock>=3.29",
-    "pytest>=9,<10",
-    "pytest-django>=4,<5",
-    "tox>=4,<5",
-]
+build-backend = "hatchling.build"
 
 [project]
 name = "phx-filters-django"
-version = "4.0.0"
+dynamic = ["version"]
 description = "Extends phx-filters, adding filters useful for Django applications."
+authors = [{ name = "Phoenix Zerin", email = "phx@phx.nz" }]
+requires-python = ">=3.12"
 readme = "README.rst"
-requires-python = ">= 3.12"
-license = { file = "LICENCE" }
-authors = [
-    { name = "Phoenix Zerin", email = "phx@phx.nz" }
-]
+license = "MIT"
 
+# :see: https://pypi.org/classifiers/
 keywords = [
     "data validation",
     "django",
-    "filters",
     "extension filters",
+    "filters",
 ]
-
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.14",
     "Topic :: Software Development :: Libraries :: Python Modules",
-    'Topic :: Text Processing :: Filters',
+    "Topic :: Text Processing :: Filters",
 ]
-
 dependencies = [
-    'phx-filters >= 3.4.0',
-    'Django >= 5.2'
+    "Django >= 5.2",
+    # 4.0 is the first release whose BaseFilter is typed (py.typed, generic
+    # over its output type).
+    "phx-filters >= 4.0.0a2",
 ]
 
 # https://filters.readthedocs.io/en/latest/extensions.html#registering-your-filters
@@ -57,34 +36,122 @@ dependencies = [
 Model = "filters_django:Model"
 
 [project.urls]
-Documentation = "https://filters.readthedocs.io/en/latest/extension_filters.html#django-filters"
+Repository = "https://github.com/todofixthis/filters-django"
+Documentation = "https://filters.readthedocs.io/"
 Changelog = "https://github.com/todofixthis/filters-django/releases"
 Issues = "https://github.com/todofixthis/filters-django/issues"
-Repository = "https://github.com/todofixthis/filters-django"
+
+[dependency-groups]
+# I'm only one person, so to keep from getting overwhelmed, I'm only committing
+# to supporting the 3 most recent versions of Python (see
+# https://github.com/todofixthis/cookiecutter-py/blob/main/docs/adr/015-propagate-template-changes-with-copier-and-rotate-python-from-agent-sessions.md).
+dev = [
+    "autohooks>=26,<27",
+    "autohooks-plugin-black>=23,<24",
+    "autohooks-plugin-mypy>=23,<24",
+    "autohooks-plugin-pytest>=23,<24",
+    "autohooks-plugin-ruff>=25,<26",
+    "django-stubs>=6,<7",
+    "mypy>=2,<3",
+    "pytest>=9,<10",
+    "pytest-django>=4,<5",
+    "tox>=4,<5",
+    "tox-uv>=1,<2",
+]
+
+# Used by GitHub Actions.
+ci = [
+    "black>=26,<27",
+    "django-stubs>=6,<7",
+    "mypy>=2,<3",
+    "pytest>=9,<10",
+    "pytest-django>=4,<5",
+    "ruff>=0.17,<0.18",
+    "tox-uv>=1,<2",
+]
 
 [tool.autohooks]
 mode = "pythonpath"
 pre-commit = [
     "autohooks.plugins.black",
+    "autohooks.plugins.mypy",
+    "autohooks.plugins.pytest",
     "autohooks.plugins.ruff",
 ]
 
+[tool.black]
+# Explicit, because black otherwise infers every version `requires-python`
+# allows, including ones newer than the running interpreter can parse.
+target-version = [
+    "py314",
+    "py313",
+    "py312",
+]
+
+[tool.django-stubs]
+# The test app's settings, which the django-stubs mypy plugin loads to type
+# its models.
+django_settings_module = "django_test_project.settings"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/filters_django",
+    "LICENCE.txt",
+    "django_test_project",
+    "test",
+]
+
 [tool.hatch.build.targets.wheel]
-packages = ["src/filters_django"]
+include = ["src/filters_django"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src/filters_django" = "filters_django"
+
+[tool.hatch.version]
+path = "src/filters_django/__init__.py"
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+strict = true
+
+# phx-filters rejects a value by returning `_invalid_value()`'s result (`Any`,
+# `None` by default) from a non-Optional `_apply`. Re-enable both codes once
+# todofixthis/filters#121 makes rejection raise instead.
+[[tool.mypy.overrides]]
+module = ["filters_django"]
+disable_error_code = ["no-any-return", "return-value"]
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "test.settings"
+DJANGO_SETTINGS_MODULE = "django_test_project.settings"
 pythonpath = ["."]
 testpaths = ["test"]
 
+[tool.ruff.lint]
+# phx-filters' BaseFilter declares `templates` as an instance attribute, so a
+# subclass annotating it `ClassVar`, as RUF012 asks, fails mypy's override
+# check.
+ignore = ["RUF012"]
+
 [tool.tox]
-env_list = ["py312", "py313", "py314"]
+env_list = [
+    "py314",
+    "py313",
+    "py312",
+]
 
 [tool.tox.env_run_base]
-allowlist_externals = ["pytest"]
-commands = [["pytest"]]
+commands = [
+    ["pytest"],
+    ["mypy", "src", "test"],
+]
+runner = "uv-venv-lock-runner"
 
 [tool.uv]
 keyring-provider = "subprocess"
 # Fix SSL errors when running in Leash containers
 system-certs = true
+# Resolve only releases at least 3 days old, so a broken or malicious release
+# is usually yanked before a lock refresh picks it up (ADR 013 in
+# todofixthis/cookiecutter-py). Exempt one package with
+# `exclude-newer-package = { <package> = false }`.
+exclude-newer = "3 days"
