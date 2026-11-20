@@ -8,7 +8,7 @@ To add a filter:
 - register it as a `filters.extensions` entry point in `pyproject.toml`, named after the class;
 - add any third-party library it needs with `uv add --bounds major <package>`.
 
-These are this project's own content in the template-owned `pyproject.toml`, so edit them here and keep them through a template-update conflict: the entry points and `[project]` dependencies; `django-stubs` and `pytest-django` in both the `dev` and `ci` groups; `django_test_project` in the sdist; the mypy plugin and override; the RUF012 ignore; and pytest's Django settings and `pythonpath`.
+These are this project's own content in the template-owned `pyproject.toml`, so edit them here and keep them through a template-update conflict: the entry points, and `[project]`'s dependencies, keywords and classifiers; `django-stubs` and `pytest-django` in both the `dev` and `ci` groups; `django_test_project` in the sdist; the mypy plugin, its `[tool.django-stubs]` settings and the `filters_django` override; the RUF012 ignore; and pytest's Django settings and `pythonpath`.
 
 The filters' user docs are prose in todofixthis/filters' `docs/extension_filters.rst`. A new filter needs a section there and a bullet in this repo's `README.rst`; a changed one needs its section updated wherever the change shows there. Where this session doesn't have filters checked out, list the docs change under a "Docs for todofixthis/filters" heading in the PR description, and tell the person you're working with.
 
