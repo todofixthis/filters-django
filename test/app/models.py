@@ -1,6 +1,7 @@
 """
 Defines a (slightly silly) Django model that we can use in unit tests.
 """
+
 from django.db import models
 
 
@@ -25,5 +26,5 @@ class Specie(models.Model):
 
     colour = models.CharField(
         max_length=24,
-        default='green',
+        default="green",
     )

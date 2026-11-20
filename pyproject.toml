@@ -10,8 +10,10 @@ dev = [
     "autohooks-plugin-black>=23,<24",
     "autohooks-plugin-ruff>=25,<26",
     "black>=26,<27",
+    "django-stubs>=5,<6",
     # >=3.29 fixes an OSError on Docker/macOS volume mounts (fcntl file locking)
     "filelock>=3.29",
+    "mypy>=2,<3",
     "pytest>=9,<10",
     "pytest-django>=4,<5",
     "tox>=4,<5",
@@ -48,8 +50,10 @@ classifiers = [
 ]
 
 dependencies = [
-    'phx-filters >= 3.4.0',
-    'Django >= 5.2'
+    "Django >= 5.2",
+    # 4.0 is the first release whose BaseFilter is typed (py.typed, generic
+    # over its output type).
+    "phx-filters >= 4.0.0a2",
 ]
 
 # https://filters.readthedocs.io/en/latest/extensions.html#registering-your-filters
@@ -69,13 +73,35 @@ pre-commit = [
     "autohooks.plugins.ruff",
 ]
 
+[tool.django-stubs]
+# The test app's settings, which the django-stubs mypy plugin loads to type
+# its models.
+django_settings_module = "test.settings"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/filters_django"]
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+strict = true
+
+# phx-filters rejects a value by returning `_invalid_value()`'s result (`Any`,
+# `None` by default) from a non-Optional `_apply`. Re-enable both codes once
+# todofixthis/filters#121 makes rejection raise instead.
+[[tool.mypy.overrides]]
+module = ["filters_django"]
+disable_error_code = ["no-any-return", "return-value"]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "test.settings"
 pythonpath = ["."]
 testpaths = ["test"]
+
+[tool.ruff.lint]
+# phx-filters' BaseFilter declares `templates` as an instance attribute, so a
+# subclass annotating it `ClassVar`, as RUF012 asks, fails mypy's override
+# check.
+ignore = ["RUF012"]
 
 [tool.tox]
 env_list = ["py312", "py313", "py314"]
