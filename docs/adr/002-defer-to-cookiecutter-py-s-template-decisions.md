@@ -2,7 +2,7 @@
 status: Accepted
 date: 2026-11-20
 scope: [.agents/rules/template-owned.md, .claude/settings.json, .copier-answers.yml, .github/workflows/build.yml, AGENTS.md, docs/adr/, pyproject.toml, renovate.json]
-summary: This project follows the copier template todofixthis/cookiecutter-py, which writes and owns the files that .agents/rules/template-owned.md lists, and defers to its decisions in them; restating ADR 001, ADR tooling relies on the phx plugin (its hooks in sessions, phx-adr in CI), not a repo-local generator, pre-commit hook or vendored copy, with CI and AGENTS.md each pinning a phx-claude-siat release's commit SHA with a trailing `# X.Y.Z`, bumped together by Renovate as cookiecutter-py ADR 018 decides, not AGENTS.md reading the pin from the adrs job; diverging from a template decision on purpose needs an ADR here naming the cookiecutter-py ADR it departs from.
+summary: This project follows the copier template todofixthis/cookiecutter-py, which writes and owns the files that .agents/rules/template-owned.md lists, and defers to its decisions in them; restating ADR 001, ADR tooling relies on the phx plugin (its hooks in sessions, phx-adr in CI), not a repo-local generator, pre-commit hook or vendored copy, with CI and AGENTS.md each pinning a phx-claude-siat release's commit SHA with a trailing `# X.Y.Z`, not AGENTS.md reading the pin from the adrs job, bumped together by Renovate as cookiecutter-py ADR 018 decides; diverging from a template decision on purpose needs an ADR here naming the cookiecutter-py ADR it departs from.
 revisit-when: This project stops taking template updates; a cookiecutter-py ADR decides reliance on the phx plugin; a template release changes AGENTS.md's ADR-tooling instruction, the adrs job or its phx Renovate manager without an ADR; the template supersedes or renumbers one of the ADRs named here; a phx plugin release imposes an ADR convention the maintainer rejects; ADRs here are regularly authored outside a Claude Code session with the plugin; plugin releases routinely outrun the pin and leave CI red; the phx plugin drops its ADR tooling or its `phx-adr` entry point; phx's `main` stops carrying only releases.
 ---
 
@@ -31,8 +31,8 @@ No template ADR decides 001's core, relying on the phx plugin rather than a
 repo-local or vendored tool, though the template's AGENTS.md carries it as an
 instruction. The template's `build.yml` comment says its ADR 009 forbids a
 repo-local copy of the tool, but neither 009 nor 018, which superseded it,
-decides that. Sessions install the plugin from phx's `main`; only CI's pin
-follows release tags.
+decides that. Sessions install the plugin from phx's `main`; only the pins, CI's and
+AGENTS.md's, follow release tags.
 
 ## Options
 
