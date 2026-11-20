@@ -6,8 +6,8 @@ let's face it, those are more fun to research (:
 import filters as f
 import pytest
 
+from django_test_project.app.models import Specie
 from filters_django import Model
-from test.app.models import Specie
 
 pytestmark = pytest.mark.django_db
 

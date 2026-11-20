@@ -12,5 +12,5 @@ DATABASES = {
 }
 
 DEBUG = True
-INSTALLED_APPS = ["test.app"]
+INSTALLED_APPS = ["django_test_project.app"]
 SECRET_KEY = uuid4().hex

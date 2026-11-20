@@ -71,10 +71,10 @@ class Model[T_model: DjangoModel](BaseFilter[T_model]):
         return f"{type(self).__name__}({self.model!r}, field={self.field!r})"
 
     def _apply(self, value: Any) -> T_model:
-        # Queries `objects`, not `_default_manager`, so a model whose manager is
-        # named otherwise raises rather than querying a different manager.
-        # django-stubs types `objects` only on concrete models, not on a bound
-        # type variable.
+        # Queries `objects`, not `_default_manager`: the two differ for a model
+        # that makes another manager its default, and this filter has always
+        # queried `objects`. django-stubs types `objects` only on concrete
+        # models, not on a bound type variable.
         query_set: QuerySet[T_model] = self.model.objects.filter(  # type: ignore[attr-defined]
             **{self.field: value}
         )

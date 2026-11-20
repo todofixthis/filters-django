@@ -10,7 +10,7 @@ dev = [
     "autohooks-plugin-black>=23,<24",
     "autohooks-plugin-ruff>=25,<26",
     "black>=26,<27",
-    "django-stubs>=5,<6",
+    "django-stubs>=6,<7",
     # >=3.29 fixes an OSError on Docker/macOS volume mounts (fcntl file locking)
     "filelock>=3.29",
     "mypy>=2,<3",
@@ -76,7 +76,7 @@ pre-commit = [
 [tool.django-stubs]
 # The test app's settings, which the django-stubs mypy plugin loads to type
 # its models.
-django_settings_module = "test.settings"
+django_settings_module = "django_test_project.settings"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/filters_django"]
@@ -93,7 +93,7 @@ module = ["filters_django"]
 disable_error_code = ["no-any-return", "return-value"]
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "test.settings"
+DJANGO_SETTINGS_MODULE = "django_test_project.settings"
 pythonpath = ["."]
 testpaths = ["test"]
 
