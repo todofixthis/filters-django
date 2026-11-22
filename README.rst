@@ -66,7 +66,7 @@ Run tests for all supported Python versions using
 
 To run tests in the current virtualenv::
 
-   uv run python manage.py test
+   uv run pytest
 
 Documentation
 -------------
@@ -97,13 +97,9 @@ Paste your ``pypi-...`` token when prompted.
 
 2. Publish to PyPI
 ~~~~~~~~~~~~~~~~~~
-#. Bump the version (updates ``pyproject.toml`` and ``uv.lock``)::
+#. Bump ``__version__`` in ``src/filters_django/__init__.py``, then commit it::
 
-    uv version <version>
-
-#. Commit the changes::
-
-    git add pyproject.toml uv.lock
+    git add src/filters_django/__init__.py
     git commit
 
 #. Publish to PyPI::
@@ -117,7 +113,7 @@ Paste your ``pypi-...`` token when prompted.
     git tag -a <version> -m "Release <version>"
     git push origin <version>
 
-   ``<version>`` must match the updated version number in ``pyproject.toml``.
+   ``<version>`` must match ``__version__`` in ``src/filters_django/__init__.py``.
 
 #. Go to the `Releases page for the repo`_.
 #. Click ``Draft a new release``.
