@@ -69,13 +69,17 @@ Then read the guide and confirm it covers this release's break. No command check
 ## Phase 2 — Publish (after confirmation)
 
 ### 6. Bump version on `develop`
-Edit `__version__` in `src/filters_django/__init__.py`
-directly — Hatch reads the version from there, since `pyproject.toml`
-declares it `dynamic`. Commit the file and push to `develop`.
+On a branch off an up-to-date `develop` (`git checkout develop && git pull`),
+edit `__version__` in `src/filters_django/__init__.py` directly — Hatch
+reads the version from there, since `pyproject.toml` declares it `dynamic`.
+Commit the file, push the branch and open a pull request into `develop`: a
+ruleset requiring pull requests rejects a direct push.
+**Stop here. Wait for the user to confirm the PR is merged before continuing**,
+so the release PR carries the bump.
 
 ### 7. Open release PR
 ```bash
-gh pr create --base main --title "Release v<version>" --body-file release-<version>.md
+gh pr create --base main --head develop --title "Release v<version>" --body-file release-<version>.md
 ```
 **Stop here. Wait for the user to confirm the PR is merged before continuing.**
 
@@ -198,13 +202,6 @@ For every issue referenced in the release notes, close it with a comment:
 ```bash
 gh issue close <number> --comment "Implemented in [v<version>](https://github.com/todofixthis/filters-django/releases/tag/<version>)."
 ```
-
-### 15. Rebase `develop` onto `main`
-```bash
-git rebase origin/main
-git push
-```
-Because `develop` now contains all of `main`'s commits, the histories no longer diverge and a regular (non-force) push succeeds.
 
 ---
 
