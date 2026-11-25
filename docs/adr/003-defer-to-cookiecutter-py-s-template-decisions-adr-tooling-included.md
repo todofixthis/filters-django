@@ -3,7 +3,7 @@ status: Accepted
 date: 2026-11-25
 scope: [.agents/rules/template-owned.md, .claude/settings.json, .copier-answers.yml, .github/workflows/build.yml, AGENTS.md, docs/adr/, pyproject.toml, renovate.json]
 summary: This project follows the copier template todofixthis/cookiecutter-py, which writes and owns the files that .agents/rules/template-owned.md lists, and defers to its decisions in them, ADR tooling included (the phx plugin, never a repo-local generator, vendored copy or pre-commit hook running ADR tooling, as cookiecutter-py ADR 019 decides, pinned as its ADR 018 decides), with no restatement of a template decision here; diverging from a template decision on purpose needs an ADR here naming the cookiecutter-py ADR it departs from.
-revisit-when: This project stops taking template updates; the template supersedes or renumbers one of the ADRs named here; a condition in cookiecutter-py ADR 018's or 019's revisit-when arises in this project.
+revisit-when: This project stops taking template updates; the template supersedes or renumbers one of the ADRs named here; a condition in cookiecutter-py ADR 019's revisit-when arises in this project.
 ---
 
 # 003: Defer to cookiecutter-py's Template Decisions, ADR Tooling Included
@@ -71,25 +71,30 @@ renumbering an ADR named here. The links pin the 1.6.0 tag, so they still lead
 to the decisions adopted.
 
 Dropped: the plugin conditions, which ADRs 018 and 019 hold, but for one
-pointer to them, since some, such as ADRs authored outside a session, are seen
-only from inside a project, whose index never shows the template's; and "a
-template release changes AGENTS.md's ADR-tooling instruction, the `adrs` job
-or its phx Renovate manager without an ADR", which watched for the template
-acting on a decision no ADR recorded; ADR 019 now records it. ADR 019 weighs
-001's vendored copy and pinned pre-commit hook for every generated project.
-001's other rejected option, the plugin's hooks with no CI check, has no
-template ADR weighing it: ADR 019 keeps the `adrs` job in every option, and
-ADR 018 decides only how its pin moves. The job lives in the template-owned
-`build.yml`, so dropping it would be the template's change.
+pointer to 019's, since some, such as ADRs authored outside a session, are
+seen only from inside a project, whose index never shows the template's (018's
+plugin condition, dropping `phx-adr`, falls under 019's "drops its ADR
+tooling", and phx's `main` taking non-release commits shows in phx-claude-
+siat, not in a project); and "a template release changes AGENTS.md's ADR-
+tooling instruction, the `adrs` job or its phx Renovate manager without an
+ADR", which watched for the template acting on a decision no ADR recorded; ADR
+019 now records it. ADR 019 weighs 001's vendored copy and pinned pre-commit
+hook for every generated project. 001's other rejected option, the plugin's
+hooks with no CI check, has no template ADR weighing it: ADR 019 keeps the
+`adrs` job in every option, and ADR 018 decides only how its pin moves. The
+job lives in the template-owned `build.yml`, so dropping it would be the
+template's change.
 
 ## Consequences
 
 - `.agents/rules/template-owned.md` decides whether a change to a
   template-owned file is made here or proposed to cookiecutter-py; that rule,
   not this ADR's `scope`, lists the files.
-- A reason specific to filters-django to revisit ADR tooling needs its own ADR
-  here, naming ADR 018 or 019 as the decision it departs from; any other
-  reason is the template's to act on.
+- A reason to revisit ADR tooling, such as a condition from cookiecutter-py
+  ADR 019's `revisit-when` seen here, goes to cookiecutter-py as a
+  `docs/backlog/` item (its ADR 011), unless it is specific to filters-django,
+  which needs its own ADR here naming ADR 018 or 019 as the decision it
+  departs from.
 
 [001-rely-on-the-phx-plugin-for-adr-tooling.md]: 001-rely-on-the-phx-plugin-for-adr-tooling.md
 [002-defer-to-cookiecutter-py-s-template-decisions.md]: 002-defer-to-cookiecutter-py-s-template-decisions.md
