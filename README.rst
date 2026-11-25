@@ -83,17 +83,24 @@ Source files for this project's documentation can be found in the
 
 Releases
 --------
+Steps to build releases are based on
+`Packaging Python Projects Tutorial <https://packaging.python.org/en/latest/tutorials/packaging-projects/>`_.
+
 .. important::
 
-   Make sure to build releases off of the ``main`` branch, and check that all
-   changes from ``develop`` have been merged before creating the release!
+   Make sure to build releases off of the ``main`` branch!
 
-<<<<<<< before updating
-1. One-time setup
-~~~~~~~~~~~~~~~~~
-Create a `PyPI API token`_ if you don't have one, then install ``keyring`` as
-a global tool and store the token:
-=======
+One-time Setup
+~~~~~~~~~~~~~~
+#. Install the ``keyring`` tool and add it to your ``PATH``::
+
+      uv tool install keyring
+      uv tool update-shell
+
+   Restart your shell after running ``update-shell``.
+#. `Create a PyPI API token <https://pypi.org/manage/account/#api-tokens>`_ and store it
+   in the OS keychain::
+
       keyring set https://upload.pypi.org/legacy/ __token__
 
    Paste the ``pypi-...`` token when prompted.
@@ -112,47 +119,32 @@ a global tool and store the token:
 #. Delete artefacts from previous builds, if applicable::
 
     rm dist/*
->>>>>>> after updating
 
-.. code-block:: bash
+#. Run the build::
 
-    uv tool install keyring
-    uv tool update-shell
-    keyring set https://upload.pypi.org/legacy/ __token__
+    uv build
 
-Paste your ``pypi-...`` token when prompted.
+#. The build artefacts will be located in the ``dist`` directory at the top level of the
+   project.
 
-<<<<<<< before updating
-2. Publish to PyPI
-~~~~~~~~~~~~~~~~~~
-#. Bump ``__version__`` in ``src/filters_django/__init__.py``, then commit it::
-
-    git add src/filters_django/__init__.py
-    git commit
-
-#. Publish to PyPI::
-=======
 2. Upload to PyPI
 ~~~~~~~~~~~~~~~~~
 #. Upload build artefacts to PyPI::
->>>>>>> after updating
 
     uv publish --username __token__
 
 3. Create GitHub Release
 ~~~~~~~~~~~~~~~~~~~~~~~~
-#. Create an annotated tag and push to GitHub::
+#. Create a tag and push to GitHub::
 
-    git tag -a <version> -m "Release <version>"
-    git push origin <version>
-
-   ``<version>`` must match ``__version__`` in ``src/filters_django/__init__.py``.
+      git tag -a <version> -m "Release <version>"
+      git push origin <version>
 
    ``<version>`` must match ``__version__`` on ``main``.
 
 #. Go to the `Releases page for the repo`_.
 #. Click ``Draft a new release``.
-#. Select the tag that you created in step 1.
+#. Select the tag that you created above.
 #. Specify the title of the release (e.g., ``Django Filters v1.2.3``).
 #. Write a description for the release.  Make sure to include:
 
@@ -165,7 +157,6 @@ Paste your ``pypi-...`` token when prompted.
 #. Click ``Publish release``.
 
 .. _Django LTS versions: https://www.djangoproject.com/download/#supported-versions
-.. _PyPI API token: https://pypi.org/manage/account/#api-tokens
 .. _filters: https://filters.readthedocs.io/
 .. _Filters library: https://pypi.python.org/pypi/phx-filters
 .. _phx-filters repo: https://github.com/todofixthis/filters/blob/develop/docs/extension_filters.rst
