@@ -1,0 +1,17 @@
+# Changes here will be overwritten by Copier
+_commit: 1.4.0
+_src_path: https://github.com/todofixthis/cookiecutter-py.git
+author_email: phx@phx.nz
+author_name: Phoenix Zerin
+copyright_holder: EFL Global
+copyright_year: 2016
+docs_site: false
+github_project_name: filters-django
+github_username: todofixthis
+package_name: filters_django
+project_name: Django Filters
+project_short_description: Extends phx-filters, adding filters useful for Django applications.
+pypi_project_name: phx-filters-django
+python_version: '3.14'
+readthedocs_slug: filters
+version: 4.0.0

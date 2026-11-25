@@ -1,26 +1,31 @@
-# Django
-*.log
-local_settings.py
+# Agent worktrees
+.claude/worktrees/
+
+# Byte-compiled / optimised / DLL files
+__pycache__
+*.pyc
 
 # Distribution / packaging
-*.egg
-*.egg-info/
-dist/
+build
+dist
+*.egg-info
 
-# Environment
+# dotenv
 .env
-.python-version
-.venv/
-venv/
 
-# Python
-*.py[cod]
-__pycache__/
+# Linting cache
+.ruff_cache
 
-# Testing
-.cache
-.coverage
-.coverage.*
-.tox/
-coverage.xml
-htmlcov/
+# Release artefacts (local working files)
+release-*-body.md
+release-*.md
+release-*.md.asc
+
+# Sphinx documentation
+docs/_build/
+
+# Tox
+.tox
+
+# virtualenv
+.venv.*/
