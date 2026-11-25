@@ -71,6 +71,10 @@ ci = [
 
 [tool.autohooks]
 mode = "pythonpath"
+# Comment on an entry here, above `pre-commit`, never inside the array:
+# `autohooks activate --force` rewrites the array sorted onto one line,
+# dropping any comment inside it. Hooks run in list order, but that sort
+# discards the order, so no hook may rely on running before another.
 pre-commit = [
     "autohooks.plugins.black",
     "autohooks.plugins.mypy",
