@@ -8,7 +8,13 @@ Django Filters
 Adds `filters`_ for for Django-specific features, including:
 
 - ``filters.ext.Model``: Search for a DB model instance matching the incoming
-  value.
+  value.  If you use a type checker, import it as ``filters_django.Model``
+  instead.
+
+.. important::
+   Upgrading from an earlier major version? Read the guide first:
+
+   - `Upgrading to Django Filters v5 <https://github.com/todofixthis/filters-django/blob/main/docs/upgrading_to_v5.rst>`_
 
 
 Requirements

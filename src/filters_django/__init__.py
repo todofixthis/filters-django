@@ -6,7 +6,7 @@ from django.db.models import Model as DjangoModel
 from django.db.models.query import QuerySet
 from filters import BaseFilter
 
-__version__ = "4.0.0"
+__version__ = "5.0.0a1"
 
 __all__ = [
     "Model",
