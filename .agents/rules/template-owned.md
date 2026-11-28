@@ -16,6 +16,7 @@ paths:
   - "AGENTS.md"
   - "CLAUDE.md"
   - "LICENCE.txt"
+  - "infra/github/main.tf"
   - "pyproject.toml"
   - "renovate.json"
   - "src/filters_django/py.typed"
